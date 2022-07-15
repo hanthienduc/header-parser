@@ -15,8 +15,12 @@ app.use(cors({optionsSuccessStatus: 200}));  // some legacy browsers choke on 20
 app.use(express.static('public'));
 
 // http://expressjs.com/en/starter/basic-routing.html
-app.get("/", function (req, res) {
-  res.sendFile(__dirname + '/views/index.html');
+// your first API endpoint... 
+app.get("/api/whoami", function (req, res) {
+  const requestHeader = req.headers
+  const requestLang = requestHeader['accept-language']
+  const requestAgent = requestHeader['user-agent']
+  res.json({ipaddress: req.ip, language: requestLang, software: requestAgent});
 });
 
 
